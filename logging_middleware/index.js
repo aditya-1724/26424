@@ -18,7 +18,7 @@ async function getFreshToken() {
 async function getValidToken() {
   if (tokenCache && Date.now() < tokenExpiry) return tokenCache;
   tokenCache = await getFreshToken();
-  tokenExpiry = Date.now() + 55 * 60 * 1000; // 55 minutes
+  tokenExpiry = Date.now() + 55 * 60 * 1000; 
   return tokenCache;
 }
 
@@ -34,9 +34,9 @@ async function log(stack, level, packageName, message) {
       headers: { Authorization: `Bearer ${token}` }
     });
   } catch (err) {
-    // Silent fail – don't spam console
+    
     if (err.response && err.response.status === 401) {
-      // Token expired – force refresh next time
+      
       tokenCache = null;
     }
   }
